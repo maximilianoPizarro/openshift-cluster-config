@@ -24,7 +24,7 @@ subscriptions:
   - name: gitlab-operator-kubernetes
     namespace: gitlab-system
     channel: stable
-    source: redhat-operators
+    source: certified-operators
 rhdh:
   namespace: rhdh-operator
   channel: fast
