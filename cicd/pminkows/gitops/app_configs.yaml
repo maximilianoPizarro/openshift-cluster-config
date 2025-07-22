@@ -53,7 +53,7 @@ spec:
       project: default
       source:
         path: apps/pminkows
-        repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
         targetRevision: HEAD
         helm:
           valueFiles:
@@ -88,7 +88,7 @@ spec:
   project: default
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -109,7 +109,7 @@ spec:
   project: default
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -138,7 +138,7 @@ spec:
       selfHeal: true
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -159,7 +159,7 @@ spec:
   project: default
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -180,7 +180,7 @@ spec:
   project: default
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -208,7 +208,7 @@ spec:
     automated: {}
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -237,7 +237,7 @@ spec:
       selfHeal: true
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -258,7 +258,7 @@ spec:
   project: default
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -282,7 +282,7 @@ spec:
       selfHeal: true
   source:
     path: apps/pminkows
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:

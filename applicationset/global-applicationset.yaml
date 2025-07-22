@@ -6,7 +6,7 @@ spec:
   goTemplate: true
   generators:
     - git:
-        repoURL: https://github.com/piomin/openshift-cluster-config.git
+        repoURL: https://github.com/maximilianoPizarro/openshift-cluster-config.git
         revision: HEAD
         directories:
           - path: applicationset/projects/*
@@ -20,7 +20,7 @@ spec:
       project: default
       sources:
         - path: applicationset/chart
-          repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+          repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
           targetRevision: HEAD
           helm:
             valueFiles:
@@ -30,7 +30,7 @@ spec:
                 value: '{{.path.basename}}'
               - name: argoNamespace
                 value: openshift-gitops
-        - repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        - repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
           targetRevision: HEAD
           ref: values
       syncPolicy:

@@ -20,7 +20,7 @@ spec:
   project: default
   source:
     path: clusters
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -77,7 +77,7 @@ spec:
   project: default
   source:
     path: cicd
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
   syncPolicy:
     automated:
@@ -101,7 +101,7 @@ spec:
   project: default
   source:
     path: global
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -129,7 +129,7 @@ spec:
   project: default
   source:
     path: clusterpool/hub
-    repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+    repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
     targetRevision: HEAD
   syncPolicy:
     automated:
@@ -149,7 +149,7 @@ spec:
     - git:
         directories:
           - path: multiapps/config/*
-        repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
         revision: HEAD
   template:
     metadata:
@@ -164,7 +164,7 @@ spec:
           valueFiles:
             - 'config/{{path.basename}}/values.yaml'
         path: multiapps
-        repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
         targetRevision: HEAD
       syncPolicy:
         syncOptions:

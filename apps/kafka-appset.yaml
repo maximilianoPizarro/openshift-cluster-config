@@ -19,7 +19,7 @@ spec:
       project: kafka
       source:
         path: apps/kafka
-        repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
         targetRevision: HEAD
         helm:
           valueFiles:

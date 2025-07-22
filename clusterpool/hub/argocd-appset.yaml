@@ -47,7 +47,7 @@ spec:
       project: clusterpool
       source:
         path: clusterpool/managed
-        repoURL: 'https://github.com/piomin/openshift-cluster-config.git'
+        repoURL: 'https://github.com/maximilianoPizarro/openshift-cluster-config.git'
         targetRevision: master
       syncPolicy:
 #        automated:

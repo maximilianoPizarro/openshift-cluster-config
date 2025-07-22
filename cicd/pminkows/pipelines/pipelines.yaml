@@ -73,7 +73,7 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: 'https://github.com/piomin/s2i-dotnetcore-ex.git'
+          value: 'https://github.com/maximilianoPizarro/s2i-dotnetcore-ex.git'
         - name: revision
           value: dotnet-5.0
         - name: submodules
@@ -175,7 +175,7 @@ spec:
 #    - name: git-clone
 #      params:
 #        - name: url
-#          value: 'https://github.com/piomin/sample-spring-kotlin-microservice.git'
+#          value: 'https://github.com/maximilianoPizarro/sample-spring-kotlin-microservice.git'
 #        - name: revision
 #          value: $(params.git-revision)
 #        - name: submodules
@@ -452,7 +452,7 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: 'https://github.com/piomin/web-api-example.git'
+          value: 'https://github.com/maximilianoPizarro/web-api-example.git'
         - name: revision
           value: master
         - name: submodules
@@ -536,7 +536,7 @@ spec:
     - name: git-clone
       params:
         - name: URL
-          value: https://github.com/piomin/sample-react-microfrontend.git
+          value: https://github.com/maximilianoPizarro/sample-react-microfrontend.git
         - name: SSL_VERIFY
           value: "false"
         - name: REVISION
@@ -651,7 +651,7 @@ spec:
     - name: git-clone
       params:
         - name: URL
-          value: https://github.com/piomin/sample-spring-kotlin-microservice.git
+          value: https://github.com/maximilianoPizarro/sample-spring-kotlin-microservice.git
         - name: SSL_VERIFY
           value: "false"
         - name: REVISION
