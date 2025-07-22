@@ -17,6 +17,6 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: rhbk
+  name: rhbk-operator
   annotations:
     argocd.argoproj.io/sync-wave: "1"
