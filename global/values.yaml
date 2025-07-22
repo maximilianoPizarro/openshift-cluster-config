@@ -18,11 +18,11 @@ subscriptions:
     channel: alpha
     source: community-operators
   - name: rhbk-operator
-    namespace: openshift-operators
+    namespace: rhbk
     channel: stable-v26.2
     source: redhat-operators
   - name: rhdh-operator
-    namespace: openshift-operators
+    namespace: developer-hub
     channel: fast
     source: redhat-operators
   #- name: serverless-operator
