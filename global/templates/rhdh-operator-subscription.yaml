@@ -13,3 +13,10 @@ spec:
   name: rhdh-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rhdh
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
