@@ -3,7 +3,9 @@ kind: Namespace
 metadata:
   name: rhdh-operator
   annotations:
-    argocd.argoproj.io/sync-wave: "1" 
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    operators.coreos.com/rhdh.rhdh-operator: ""
 ---
 apiVersion: operators.coreos.com/v1alpha2
 kind: OperatorGroup
@@ -11,7 +13,7 @@ metadata:
   name: rhdh-operator
   namespace: rhdh-operator
   annotations:
-    argocd.argoproj.io/sync-wave: "2" 
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   targetNamespaces:
     - rhdh-operator
@@ -22,7 +24,7 @@ metadata:
   name: rhdh-operator
   namespace: rhdh-operator
   annotations:
-    argocd.argoproj.io/sync-wave: "3" 
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   channel: {{ .Values.rhdh.channel }}
 {{- if $.Values.rhdh.startingCSV }}

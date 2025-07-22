@@ -12,7 +12,7 @@ spec:
 {{- end }}
   installPlanApproval: Automatic
   name: rhbk-operator
-  source: rhbk-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
 ---
 apiVersion: v1
