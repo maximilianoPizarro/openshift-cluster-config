@@ -21,10 +21,10 @@ subscriptions:
     namespace: openshift-serverless
     channel: stable
     source: redhat-operators
-  #- name: serverless-operator
-  #  namespace: openshift-serverless
-  #  channel: stable
-  #  source: redhat-operators
+  - name: gitlab-operator-kubernetes
+    namespace: gitlab-system
+    channel: stable
+    source: redhat-operators
 rhdh:
   namespace: rhdh-operator
   channel: fast
@@ -45,3 +45,5 @@ knative:
 kafka:
   enabled: false
   dedicatedNode: false
+gitlab:
+  enabled: true
