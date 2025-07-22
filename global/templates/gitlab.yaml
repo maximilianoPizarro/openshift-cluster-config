@@ -1,4 +1,4 @@
-{{- if eq .Values.gitops.enabled true }}
+{{- if eq .Values.gitlab.enabled true }}
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
