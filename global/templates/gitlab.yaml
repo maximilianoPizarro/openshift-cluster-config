@@ -2,16 +2,17 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: argocd-gitlab-system-writer # Name for the Role
-  namespace: gitlab-system           # <--- Important: This Role is specific to the 'gitlab-system' namespace
+  name: argocd-gitlab-writer # A descriptive name for the Role
+  namespace: gitlab-system    # <--- Important: This Role is specific to the 'gitlab-system' namespace
 rules:
   - apiGroups:
-      - "redhatcop.redhat.io" # The API group for the Patch custom resource
+      - "apps.gitlab.com" # The API group for the GitLab custom resource
     resources:
-      - "patches"             # The specific resource type
+      - "gitlabs"         # The specific resource type (plural form)
+      - "gitlabs/status"  # Often needed for status updates by controllers
     verbs:
-      - "create"              # The permission that was denied
-      - "get"                 # Add other verbs for full management (recommended for deployment)
+      - "create"          # The permission that was denied
+      - "get"             # Add other common verbs for full management (recommended for deployment tools)
       - "list"
       - "watch"
       - "update"
@@ -21,15 +22,15 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: argocd-gitlab-system-binding # Name for the RoleBinding
-  namespace: gitlab-system           # <--- Important: This RoleBinding is specific to the 'gitlab-system' namespace
+  name: argocd-gitlab-binding # A descriptive name for the RoleBinding
+  namespace: gitlab-system    # <--- Important: This RoleBinding is specific to the 'gitlab-system' namespace
 subjects:
   - kind: ServiceAccount
     name: openshift-gitops-argocd-application-controller # The name of ArgoCD's service account
     namespace: openshift-gitops                        # The namespace where ArgoCD's service account lives
 roleRef:
   kind: Role
-  name: argocd-gitlab-system-writer # Refers to the Role created above
+  name: argocd-gitlab-writer # Refers to the Role created above
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps.gitlab.com/v1beta1
