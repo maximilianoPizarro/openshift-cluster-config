@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhdh-operator
-  namespace: developer-hub
+  namespace: rhdh-operator
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
@@ -11,14 +11,14 @@ spec:
   startingCSV: {{ .Values.rhdh.startingCSV }}
 {{- end }}
   installPlanApproval: Automatic
-  name: developer-hub
+  name: rhdh-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: developer-hub
+  name: rhdh-operator
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 ---
@@ -26,9 +26,7 @@ apiVersion: operators.coreos.com/v1alpha2
 kind: OperatorGroup
 metadata:
   name: rhdh-operator
-  namespace: developer-hub
+  namespace: rhdh-operator
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-spec:
-  targetNamespaces:
-    - developer-hub
+spec: {}

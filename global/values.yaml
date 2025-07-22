@@ -17,18 +17,17 @@ subscriptions:
     namespace: patch-operator
     channel: alpha
     source: community-operators
-  #- name: serverless-operator
-  #  namespace: openshift-serverless
-  #  channel: stable
-  #  source: redhat-operators
+  - name: serverless-operator
+    namespace: openshift-serverless
+    channel: stable
+    source: redhat-operators
   #- name: serverless-operator
   #  namespace: openshift-serverless
   #  channel: stable
   #  source: redhat-operators
 rhdh:
   namespace: developer-hub
-  channel: fast
-  startingCSV: rhdh-operator.v1.6.2
+  channel: stable
 rhbk:
   namespace: rhbk
   channel: stable-v26.2
