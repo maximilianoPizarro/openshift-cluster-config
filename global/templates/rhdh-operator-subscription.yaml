@@ -29,4 +29,6 @@ metadata:
   namespace: rhdh-operator
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-spec: {}
+spec:
+  targetNamespaces:
+    - rhdh-operator

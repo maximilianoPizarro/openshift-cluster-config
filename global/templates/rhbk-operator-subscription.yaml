@@ -29,4 +29,6 @@ metadata:
   namespace: rhbk-operator
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-spec: {}
+spec:
+  targetNamespaces:
+    - rhbk-operator
