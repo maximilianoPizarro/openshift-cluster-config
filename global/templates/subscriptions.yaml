@@ -21,7 +21,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 ---
-apiVersion: operators.coreos.com/v1alpha1
+apiVersion: operators.coreos.com/v1alpha2
 kind: OperatorGroup
 metadata:
   name: {{ .name }}
