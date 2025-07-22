@@ -1,4 +1,37 @@
 {{- if eq .Values.gitlab.enabled true }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-gitlab-system-writer # Name for the Role
+  namespace: gitlab-system           # <--- Important: This Role is specific to the 'gitlab-system' namespace
+rules:
+  - apiGroups:
+      - "redhatcop.redhat.io" # The API group for the Patch custom resource
+    resources:
+      - "patches"             # The specific resource type
+    verbs:
+      - "create"              # The permission that was denied
+      - "get"                 # Add other verbs for full management (recommended for deployment)
+      - "list"
+      - "watch"
+      - "update"
+      - "patch"
+      - "delete"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-gitlab-system-binding # Name for the RoleBinding
+  namespace: gitlab-system           # <--- Important: This RoleBinding is specific to the 'gitlab-system' namespace
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller # The name of ArgoCD's service account
+    namespace: openshift-gitops                        # The namespace where ArgoCD's service account lives
+roleRef:
+  kind: Role
+  name: argocd-gitlab-system-writer # Refers to the Role created above
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
