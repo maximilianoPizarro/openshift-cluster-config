@@ -27,7 +27,8 @@ subscriptions:
   #  source: redhat-operators
 rhdh:
   namespace: developer-hub
-  channel: stable
+  channel: fast
+  startingCSV: rhdh-operator.v1.6.2
 rhbk:
   namespace: rhbk
   channel: stable-v26.2
