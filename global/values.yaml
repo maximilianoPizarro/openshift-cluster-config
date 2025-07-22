@@ -33,6 +33,15 @@ subscriptions:
   #  namespace: openshift-serverless
   #  channel: stable
   #  source: redhat-operators
+rhdh:
+  namespace: rhdh-operator
+  channel: fast
+  startingCSV: rhdh-operator.v1.6.2
+rhbk:
+  namespace: rhbk
+  channel: stable-v26.2
+  startingCSV: rhbk-operator.v26.2.5-opr.1
+
 acs:
   enabled: false
 sealedsecrets:

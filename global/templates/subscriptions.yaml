@@ -13,6 +13,7 @@ spec:
   source: {{ .source }}
   sourceNamespace: openshift-marketplace
 ---
+{{- if ne .namespace "openshift-operators" }}
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -29,4 +30,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec: {}
 ---
+{{- end }}
 {{- end }}

@@ -1,0 +1,13 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhdh-operator
+spec:
+  channel: {{ .Values.rhdh.channel }}
+{{- if $.Values.rhdh.startingCSV }}
+  startingCSV: {{ .Values.rhdh.startingCSV }}
+{{- end }}
+  installPlanApproval: Automatic
+  name: rhdh-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
