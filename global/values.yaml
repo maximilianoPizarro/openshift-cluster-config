@@ -41,7 +41,7 @@ sealedsecrets:
 gitops:
   enabled: false
 knative:
-  enabled: true
+  enabled: false
 kafka:
-  enabled: true
+  enabled: false
   dedicatedNode: false
