@@ -56,5 +56,5 @@ spec:
         enabled: false
       gitlab-runner:
         install: false                             
-    version: '7.4.0'
+    version: '9.2.0'
 {{- end }}
