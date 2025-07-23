@@ -47,7 +47,7 @@ knative:
 kafka:
   enabled: false
   dedicatedNode: false
-patch-operator:
+patchoperator:
   enabled: true
 gitlab:
   enabled: true
