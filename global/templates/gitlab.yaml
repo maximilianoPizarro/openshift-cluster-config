@@ -124,6 +124,21 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2" 
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gitlab-nginx-scc-use-anyuid-binding
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+subjects:
+- kind: ServiceAccount
+  name: gitlab-nginx-scc 
+  namespace: gitlab-system
+roleRef:
+- apiGroups: ["security.openshift.io"]
+  resourceNames: ["anyuid"]
+  resources: ["securitycontextconstraints"]
+  verbs: ["use"]
 # ---
 # # Sync Wave 2: ClusterRoleBinding to allow ServiceAccount to use the SCC
 # # This binds gitlab-nginx-scc ServiceAccount to the custom SCC
