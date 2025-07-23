@@ -124,20 +124,41 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2" 
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: gitlab-nginx-scc-use-binding # A descriptive name for the binding
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-subjects:
-- kind: ServiceAccount
-  name: gitlab-nginx-scc # This should be the name of the ServiceAccount used by your NGINX Ingress Controller
-  namespace: gitlab-system # The namespace where that ServiceAccount exists
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:openshift:scc:gitlab-nginx-scc # This is the crucial part: it refers to the SCC by name as if it were a ClusterRole
+# ---
+# # Sync Wave 2: ClusterRoleBinding to allow ServiceAccount to use the SCC
+# # This binds gitlab-nginx-scc ServiceAccount to the custom SCC
+# # Note: SCC definition (gitlab-nginx-scc) must be applied separately as a Cluster-Scoped Resource.
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: gitlab-nginx-scc-use-binding
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "2"
+# subjects:
+# - kind: ServiceAccount
+#   name: gitlab-nginx-scc # VERIFY THIS IS THE CORRECT SERVICE ACCOUNT NAME
+#   namespace: gitlab-system
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: system:openshift:scc:gitlab-nginx-scc # Refers to the SCC by name as a ClusterRole
+# ---
+# # SCC Definition - THIS MUST BE APPLIED SEPARATELY TO THE CLUSTER!
+# apiVersion: security.openshift.io/v1
+# kind: SecurityContextConstraints
+# metadata:
+#   name: gitlab-nginx-scc
+# runAsUser:
+#   type: MustRunAs
+#   uid: 101 # Allow running as UID 101
+# seLinuxContext:
+#   type: RunAsAny
+# fsGroup:
+#   type: RunAsAny
+# supplementalGroups:
+#   type: RunAsAny
+# allowPrivilegeEscalation: true
+# readOnlyRootFilesystem: false
 ---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
