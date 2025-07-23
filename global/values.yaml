@@ -40,6 +40,8 @@ gitlab:
   channel: stable
   startingCSV: gitlab-operator-kubernetes.v2.2.1
   source: community-operators
+  instance:
+    enabled: false
   enabled: true
 
 acs:

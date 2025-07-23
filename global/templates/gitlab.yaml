@@ -186,13 +186,14 @@ metadata:
 data:
   "22": "gitlab-system/gitlab-gitlab-shell:22"
 ---
+{{- if eq .Values.gitlab.instance.enabled true }}
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
   name: gitlab
   namespace: gitlab-system
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   chart:
     values:
@@ -243,4 +244,5 @@ spec:
       gitlab-runner:
         install: true
     version: '9.2.1'
+{{- end }}
 {{- end }}
