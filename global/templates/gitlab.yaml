@@ -1,4 +1,39 @@
 {{- if eq .Values.gitlab.enabled true }}
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: gitlab-operator-kubernetes
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  channel: {{ .Values.rhbk.channel }}
+{{- if $.Values.rhbk.startingCSV }}
+  startingCSV: {{ .Values.rhbk.startingCSV }}
+{{- end }}
+  installPlanApproval: Automatic
+  name: gitlab-operator-kubernetes
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+---
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  name: gitlab-operator-kubernetes
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  targetNamespaces:
+    - gitlab-system
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:

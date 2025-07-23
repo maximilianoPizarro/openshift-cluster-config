@@ -21,10 +21,10 @@ subscriptions:
   #  namespace: openshift-serverless
   #  channel: stable
   #  source: redhat-operators
-  - name: gitlab-operator-kubernetes
-    namespace: gitlab-system
-    channel: stable
-    source: certified-operators
+  #- name: gitlab-operator-kubernetes
+  #  namespace: gitlab-system
+  #  channel: stable
+  #  source: certified-operators
 rhdh:
   namespace: rhdh-operator
   channel: fast
@@ -34,6 +34,11 @@ rhbk:
   namespace: rhbk-operator
   channel: stable-v26.2
   startingCSV: rhbk-operator.v26.2.5-opr.1
+  enabled: true
+gitlab:
+  namespace: gitlab-system
+  channel: stable
+  startingCSV: gitlab-operator-kubernetes.v2.2.1
   enabled: true
 
 acs:
@@ -49,5 +54,3 @@ kafka:
   dedicatedNode: false
 patchoperator:
   enabled: true
-gitlab:
-  enabled: false
