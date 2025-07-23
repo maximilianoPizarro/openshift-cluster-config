@@ -186,6 +186,7 @@ spec:
         enabled: true      
         controller:        
           podSecurityContext: {}
+          containerSecurityContext: {}
       gitlab-runner:
         install: false
     version: '9.2.1'
