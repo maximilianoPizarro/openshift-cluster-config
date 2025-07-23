@@ -189,6 +189,11 @@ spec:
             runAsUser: 1001       
             runAsGroup: 1001     
             fsGroup: 1001
+          defaultBackend:
+            podSecurityContext:
+              runAsUser: 1001       
+              runAsGroup: 1001     
+              fsGroup: 1001
       gitlab-runner:
         install: false
     version: '9.2.1'
