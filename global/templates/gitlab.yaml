@@ -192,7 +192,7 @@ metadata:
   name: gitlab
   namespace: gitlab-system
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   chart:
     values:
