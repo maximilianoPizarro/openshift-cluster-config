@@ -37,19 +37,19 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: argocd-gitlab-writer 
+  name: argocd-gitlab-writer
   namespace: gitlab-system
   annotations:
-    argocd.argoproj.io/sync-wave: "2"    
+    argocd.argoproj.io/sync-wave: "2"
 rules:
   - apiGroups:
-      - "apps.gitlab.com" 
+      - "apps.gitlab.com"
     resources:
-      - "gitlabs"         
-      - "gitlabs/status"  
+      - "gitlabs"
+      - "gitlabs/status"
     verbs:
-      - "create"          
-      - "get"             
+      - "create"
+      - "get"
       - "list"
       - "watch"
       - "update"
@@ -59,17 +59,42 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: argocd-gitlab-binding 
+  name: argocd-gitlab-binding
   namespace: gitlab-system
   annotations:
-    argocd.argoproj.io/sync-wave: "2"    
+    argocd.argoproj.io/sync-wave: "2"
 subjects:
   - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller 
-    namespace: openshift-gitops                        
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
 roleRef:
   kind: Role
   name: argocd-gitlab-writer
+  apiGroup: rbac.authorization.k8s.io
+---
+# New ClusterRole for IngressClass
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-ingressclass-creator
+  # No namespace here, as it's cluster-scoped
+rules:
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingressclasses"]
+    verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+---
+# New ClusterRoleBinding for IngressClass
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-ingressclass-binding-cluster
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  kind: ClusterRole
+  name: argocd-ingressclass-creator # This must match the ClusterRole name above
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: networking.k8s.io/v1
@@ -78,7 +103,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
   name: gitlab-nginx
-  namespace: gitlab-system
 spec:
   controller: k8s.io/ingress-nginx
 ---
@@ -94,7 +118,7 @@ spec:
     values:
       certmanager:
         install: false
-        installCRDs: false        
+        installCRDs: false
       global:
         hosts:
           domain: gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
@@ -105,9 +129,9 @@ spec:
           tls:
             secretName: null
         edition: ce
-      nginx-ingress:       
+      nginx-ingress:
         enabled: false
       gitlab-runner:
-        install: false                             
+        install: false
     version: '9.2.1'
 {{- end }}
