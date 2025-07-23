@@ -116,60 +116,102 @@ metadata:
 spec:
   controller: k8s.io/ingress-nginx
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: gitlab-nginx-scc
-  namespace: gitlab-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "2" 
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: gitlab-nginx-scc-use-anyuid-binding
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-subjects:
-- kind: ServiceAccount
-  name: gitlab-nginx-scc 
-  namespace: gitlab-system
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:openshift:scc:anyuid
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: gitlab-nginx-ingress-anyuid-binding
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-subjects:
-- kind: ServiceAccount
-  name: gitlab-nginx-ingress
-  namespace: gitlab-system
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:openshift:scc:anyuid
 # ---
 # # SCC Definition - THIS MUST BE APPLIED SEPARATELY TO THE CLUSTER!
+# Save this as gitlab-nginx-final-scc.yaml (OVERWRITE YOUR EXISTING FILE)
 # apiVersion: security.openshift.io/v1
 # kind: SecurityContextConstraints
 # metadata:
-#   name: gitlab-nginx-scc
+#   name: gitlab-nginx-final-scc
+# allowPrivilegeEscalation: false # As per your generated pod
+# requiredDropCapabilities:
+# - ALL
+# allowedCapabilities:
+# - NET_BIND_SERVICE # Essential for NGINX
 # runAsUser:
 #   type: MustRunAs
-#   uid: 101 # Allow running as UID 101
-# seLinuxContext:
-#   type: RunAsAny
+#   uid: 101 # NGINX's user
+# runAsGroup:
+#   type: MustRunAs
+#   uid: 82 # NGINX's group
 # fsGroup:
 #   type: RunAsAny
 # supplementalGroups:
 #   type: RunAsAny
-# allowPrivilegeEscalation: true
-# readOnlyRootFilesystem: false
+# seLinuxContext:
+#   type: RunAsAny
+# priority: 100 # HIGH PRIORITY to ensure it's picked over restricted-v2
+# users: [] # This list is populated by the ClusterRoleBinding
+# volumes:
+# - configMap
+# - downwardAPI
+# - emptyDir
+# - persistentVolumeClaim
+# - projected
+# - secret
+# # --- ADD THIS BLOCK ---
+# seccompProfiles:
+# - runtime/default # Allow the 'RuntimeDefault' seccomp profile
+# - unconfined      # Allow 'Unconfined' as a fallback/option
+# --- END ADD BLOCK ---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'system:openshift:scc:gitlab-nginx-final-scc'
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+rules:
+  - verbs:
+      - use
+    apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    resourceNames:
+      - gitlab-nginx-final-scc
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gitlab-nginx-final-scc-binding
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-nginx-ingress
+    namespace: gitlab-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:gitlab-nginx-final-scc'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gitlab-nginx-ingress-leader-elector
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+rules:
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitlab-nginx-ingress-leader-elector-binding
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2" 
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-nginx-ingress 
+    namespace: gitlab-system
+roleRef:
+  kind: Role
+  name: gitlab-nginx-ingress-leader-elector
+  apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
