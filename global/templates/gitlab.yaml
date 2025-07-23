@@ -200,11 +200,18 @@ spec:
       nginx-ingress:
         enabled: true      
         controller:        
-          podSecurityContext: {}
+          podSecurityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false      
+            allowPrivilegeEscalation: true
+            seccompProfile:
+              type: "RuntimeDefault"            
           containerSecurityContext:
             runAsNonRoot: true
             readOnlyRootFilesystem: false      
-            allowPrivilegeEscalation: true  
+            allowPrivilegeEscalation: true
+            seccompProfile:
+              type: "RuntimeDefault"            
       gitlab-runner:
         install: false
     version: '9.2.1'
