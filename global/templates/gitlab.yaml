@@ -236,18 +236,18 @@ spec:
         installCRDs: false
       global:
         hosts:
-          domain: apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+          domain: apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
           https: true
           gitlabVersion: "18.2.1"
           gitlab: # Explicitly define the main GitLab web UI hostname
-            name: gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+            name: gitlab.apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
           registry: # Explicitly define the Container Registry hostname
-            name: registry.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+            name: registry.apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
           minio: # Explicitly define the MinIO hostname
-            name: minio.gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+            name: minio.gitlab.apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
           kas: # Explicitly define the KAS hostname if you use it
-            name: kas.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
-          externalUrl: https://gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+            name: kas.apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
+          externalUrl: https://gitlab.apps.rosa.jyfci-j3qtr-itx.dsvw.p3.openshiftapps.com
         ingress:
           configureCertmanager: false
           tls:
@@ -258,8 +258,10 @@ spec:
             extendedConfiguration: max_connections = 200
       nginx-ingress:
         enabled: true
-        tcpExternalConfig: false      
-        controller:           
+        tcpExternalConfig: fals
+        controller:
+          service: 
+            type: LoadBalancer           
           containerSecurityContext:
             capabilities:
               add:

@@ -1,0 +1,33 @@
+kind: SecurityContextConstraints
+metadata:
+  name: gitlab-nginx-final-scc
+allowPrivilegeEscalation: false # As per your generated pod
+requiredDropCapabilities:
+- ALL
+allowedCapabilities:
+- NET_BIND_SERVICE # Essential for NGINX
+runAsUser:
+  type: MustRunAs
+  uid: 101 # NGINX's user
+runAsGroup:
+  type: MustRunAs
+  uid: 82 # NGINX's group
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+priority: 100 # HIGH PRIORITY to ensure it's picked over restricted-v2
+users: [] # This list is populated by the ClusterRoleBinding
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- persistentVolumeClaim
+- projected
+- secret
+# --- ADD THIS BLOCK ---
+seccompProfiles:
+- runtime/default # Allow the 'RuntimeDefault' seccomp profile
+- unconfined      # Allow 'Unconfined' as a fallback/option
