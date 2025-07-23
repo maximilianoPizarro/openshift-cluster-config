@@ -2,17 +2,19 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: argocd-gitlab-writer # A descriptive name for the Role
-  namespace: gitlab-system    # <--- Important: This Role is specific to the 'gitlab-system' namespace
+  name: argocd-gitlab-writer 
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"    
 rules:
   - apiGroups:
-      - "apps.gitlab.com" # The API group for the GitLab custom resource
+      - "apps.gitlab.com" 
     resources:
-      - "gitlabs"         # The specific resource type (plural form)
-      - "gitlabs/status"  # Often needed for status updates by controllers
+      - "gitlabs"         
+      - "gitlabs/status"  
     verbs:
-      - "create"          # The permission that was denied
-      - "get"             # Add other common verbs for full management (recommended for deployment tools)
+      - "create"          
+      - "get"             
       - "list"
       - "watch"
       - "update"
@@ -22,15 +24,17 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: argocd-gitlab-binding # A descriptive name for the RoleBinding
-  namespace: gitlab-system    # <--- Important: This RoleBinding is specific to the 'gitlab-system' namespace
+  name: argocd-gitlab-binding 
+  namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"    
 subjects:
   - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller # The name of ArgoCD's service account
-    namespace: openshift-gitops                        # The namespace where ArgoCD's service account lives
+    name: openshift-gitops-argocd-application-controller 
+    namespace: openshift-gitops                        
 roleRef:
   kind: Role
-  name: argocd-gitlab-writer # Refers to the Role created above
+  name: argocd-gitlab-writer
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps.gitlab.com/v1beta1
@@ -38,6 +42,8 @@ kind: GitLab
 metadata:
   name: gitlab
   namespace: gitlab-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   chart:
     values:
