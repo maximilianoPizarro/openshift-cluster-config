@@ -182,13 +182,13 @@ spec:
         postgresql:
           primary:
             extendedConfiguration: max_connections = 200
-      nginx-ingress: &nginx-ingress
-        enabled: true
-        tcpExternalConfig: "true"
-        controller: &nginx-ingress-controller
+      nginx-ingress:
+        enabled: true      
+        controller:        
           podSecurityContext:
-            seccompProfile:
-              type: "RuntimeDefault"
+            runAsUser: 1001       
+            runAsGroup: 1001     
+            fsGroup: 1001
       gitlab-runner:
         install: false
     version: '9.2.1'
