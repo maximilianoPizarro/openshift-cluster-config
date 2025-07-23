@@ -50,4 +50,4 @@ kafka:
 patchoperator:
   enabled: true
 gitlab:
-  enabled: true
+  enabled: false
