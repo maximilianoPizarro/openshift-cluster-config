@@ -185,21 +185,8 @@ spec:
       nginx-ingress:
         enabled: true      
         controller:        
-          podSecurityContext:
-            runAsUser: 1001       
-            runAsGroup: 0     
-            fsGroup: 1001
+          podSecurityContext: {}
           containerSecurityContext: 
-            capabilities:
-              add:
-                - NET_BIND_SERVICE
-              drop:
-                - ALL
-            runAsUser: 1001
-            runAsGroup: 0
-            runAsNonRoot: true
-            readOnlyRootFilesystem: false
-            allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
       gitlab-runner:
