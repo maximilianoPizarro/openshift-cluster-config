@@ -209,9 +209,9 @@ spec:
                 - ALL
             runAsNonRoot: true
             readOnlyRootFilesystem: false      
-            allowPrivilegeEscalation: true  
-            seccompProfile:
-              type: RuntimeDefault
+            allowPrivilegeEscalation: true
+          defaultBackend:
+            podSecurityContext: {}  
       gitlab-runner:
         install: false
     version: '9.2.1'
