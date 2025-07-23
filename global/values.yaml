@@ -5,10 +5,10 @@ subscriptions:
   #  namespace: openshift-operators
   #  channel: stable
   #  source: redhat-operators
-  - name: servicemeshoperator
-    namespace: openshift-operators
-    channel: stable
-    source: redhat-operators
+  #- name: servicemeshoperator
+  #  namespace: openshift-operators
+  #  channel: stable
+  #  source: redhat-operators
   - name: amq-streams
     namespace: openshift-operators
     channel: stable
@@ -17,10 +17,10 @@ subscriptions:
     namespace: patch-operator
     channel: alpha
     source: community-operators
-  - name: serverless-operator
-    namespace: openshift-serverless
-    channel: stable
-    source: redhat-operators
+  #- name: serverless-operator
+  #  namespace: openshift-serverless
+  #  channel: stable
+  #  source: redhat-operators
   - name: gitlab-operator-kubernetes
     namespace: gitlab-system
     channel: stable
@@ -29,10 +29,12 @@ rhdh:
   namespace: rhdh-operator
   channel: fast
   startingCSV: rhdh-operator.v1.6.3
+  enabled: true
 rhbk:
   namespace: rhbk-operator
   channel: stable-v26.2
   startingCSV: rhbk-operator.v26.2.5-opr.1
+  enabled: true
 
 acs:
   enabled: false
@@ -45,5 +47,7 @@ knative:
 kafka:
   enabled: false
   dedicatedNode: false
+patch-operator:
+  enabled: true
 gitlab:
   enabled: true

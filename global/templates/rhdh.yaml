@@ -1,3 +1,4 @@
+{{- if eq .Values.rhdh.enabled true }}
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -32,3 +33,4 @@ spec:
   name: rhdh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+{{- end }}
