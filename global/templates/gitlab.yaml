@@ -89,7 +89,7 @@ spec:
         hosts:
           domain: apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
           https: true
-          gitlabVersion: "16.9.11"
+          gitlabVersion: "18.2.1"
         ingress:
           enabled: false
         edition: ce
@@ -97,5 +97,5 @@ spec:
         enabled: false
       gitlab-runner:
         install: false                             
-    version: '7.9.11'
+    version: '9.2.1'
 {{- end }}
