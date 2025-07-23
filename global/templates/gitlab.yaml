@@ -213,6 +213,14 @@ roleRef:
   name: gitlab-nginx-ingress-leader-elector
   apiGroup: rbac.authorization.k8s.io
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-nginx-ingress-tcp
+  namespace: gitlab-system
+data:
+  "22": "gitlab-system/gitlab-gitlab-shell:22"
+---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
