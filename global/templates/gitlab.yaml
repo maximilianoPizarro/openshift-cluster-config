@@ -233,7 +233,7 @@ spec:
     values:
       certmanager:
         install: false
-        #installCRDs: false
+        installCRDs: false
       global:
         hosts:
           domain: apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
@@ -275,5 +275,7 @@ spec:
               type: "RuntimeDefault"            
       gitlab-runner:
         install: false
+      gitlab-shell:
+        install: true
     version: '9.2.1'
 {{- end }}
