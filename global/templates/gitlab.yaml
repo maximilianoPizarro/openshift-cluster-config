@@ -7,13 +7,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  channel: {{ .Values.rhbk.channel }}
-{{- if $.Values.rhbk.startingCSV }}
-  startingCSV: {{ .Values.rhbk.startingCSV }}
+  channel: {{ .Values.gitlab.channel }}
+{{- if $.Values.gitlab.startingCSV }}
+  startingCSV: {{ .Values.gitlab.startingCSV }}
 {{- end }}
   installPlanApproval: Automatic
   name: gitlab-operator-kubernetes
-  source: certified-operators
+  source: {{ .Values.gitlab.source | default "certified-operators" }}
   sourceNamespace: openshift-marketplace
 ---
 apiVersion: v1
@@ -72,6 +72,16 @@ roleRef:
   name: argocd-gitlab-writer
   apiGroup: rbac.authorization.k8s.io
 ---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: gitlab-nginx
+  namespace: gitlab-system
+spec:
+  controller: k8s.io/ingress-nginx
+---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
@@ -87,11 +97,13 @@ spec:
         installCRDs: false        
       global:
         hosts:
-          domain: apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+          domain: gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
           https: true
           gitlabVersion: "18.2.1"
         ingress:
-          enabled: false
+          configureCertmanager: false
+          tls:
+            secretName: null
         edition: ce
       nginx-ingress:       
         enabled: false

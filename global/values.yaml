@@ -39,6 +39,7 @@ gitlab:
   namespace: gitlab-system
   channel: stable
   startingCSV: gitlab-operator-kubernetes.v2.2.1
+  source: community-operators
   enabled: true
 
 acs:
