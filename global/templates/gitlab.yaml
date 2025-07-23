@@ -106,6 +106,27 @@ metadata:
 spec:
   controller: k8s.io/ingress-nginx
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab-nginx-scc
+  namespace: gitlab-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gitlab-nginx-scc-use-binding # A descriptive name for the binding
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+subjects:
+- kind: ServiceAccount
+  name: gitlab-nginx-scc # This should be the name of the ServiceAccount used by your NGINX Ingress Controller
+  namespace: gitlab-system # The namespace where that ServiceAccount exists
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:gitlab-nginx-scc # This is the crucial part: it refers to the SCC by name as if it were a ClusterRole
+---
 apiVersion: apps.gitlab.com/v1beta1
 kind: GitLab
 metadata:
@@ -118,7 +139,7 @@ spec:
     values:
       certmanager:
         install: false
-        installCRDs: false
+        #installCRDs: false
       global:
         hosts:
           domain: gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
@@ -129,8 +150,11 @@ spec:
           tls:
             secretName: null
         edition: ce
-      nginx-ingress:
-        enabled: false
+        postgresql:
+          primary:
+            extendedConfiguration: max_connections = 200
+      #nginx-ingress:
+      #  enabled: false
       gitlab-runner:
         install: false
     version: '9.2.1'
