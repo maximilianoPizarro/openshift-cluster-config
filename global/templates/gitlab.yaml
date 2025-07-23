@@ -224,7 +224,7 @@ spec:
             extendedConfiguration: max_connections = 200
       nginx-ingress:
         enabled: true
-        tcpExternalConfig: fals
+        tcpExternalConfig: false
         controller:
           service: 
             type: LoadBalancer           
