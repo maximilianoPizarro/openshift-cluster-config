@@ -135,7 +135,7 @@ subjects:
   name: gitlab-nginx-scc 
   namespace: gitlab-system
 roleRef:
-- apiGroups: ["security.openshift.io"]
+  apiGroups: ["security.openshift.io"]
   resourceNames: ["anyuid"]
   resources: ["securitycontextconstraints"]
   verbs: ["use"]
