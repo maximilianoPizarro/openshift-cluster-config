@@ -138,6 +138,21 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: system:openshift:scc:anyuid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gitlab-nginx-ingress-anyuid-binding
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+subjects:
+- kind: ServiceAccount
+  name: gitlab-nginx-ingress
+  namespace: gitlab-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
 # ---
 # # SCC Definition - THIS MUST BE APPLIED SEPARATELY TO THE CLUSTER!
 # apiVersion: security.openshift.io/v1
