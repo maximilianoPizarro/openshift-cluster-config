@@ -199,17 +199,18 @@ spec:
             extendedConfiguration: max_connections = 200
       nginx-ingress:
         enabled: true      
-        controller:        
-          podSecurityContext:
-            runAsNonRoot: true
-            readOnlyRootFilesystem: false      
-            allowPrivilegeEscalation: true
-            seccompProfile:
-              type: "RuntimeDefault"            
+        controller:           
           containerSecurityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE 
+              drop:
+                - ALL 
+            runAsUser: 101       
+            runAsGroup: 82       
             runAsNonRoot: true
-            readOnlyRootFilesystem: false      
-            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false 
             seccompProfile:
               type: "RuntimeDefault"            
       gitlab-runner:
