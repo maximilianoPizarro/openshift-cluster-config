@@ -201,7 +201,10 @@ spec:
         enabled: true      
         controller:        
           podSecurityContext: {}
-          containerSecurityContext: 
+          containerSecurityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false      
+            allowPrivilegeEscalation: false  
             seccompProfile:
               type: RuntimeDefault
       gitlab-runner:
