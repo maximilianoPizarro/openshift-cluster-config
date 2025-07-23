@@ -248,7 +248,8 @@ spec:
           primary:
             extendedConfiguration: max_connections = 200
       nginx-ingress:
-        enabled: true      
+        enabled: true
+        tcpExternalConfig: false      
         controller:           
           containerSecurityContext:
             capabilities:
