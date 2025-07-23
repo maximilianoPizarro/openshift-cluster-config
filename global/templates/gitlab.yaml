@@ -244,7 +244,7 @@ spec:
           registry: # Explicitly define the Container Registry hostname
             name: registry.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
           minio: # Explicitly define the MinIO hostname
-            name: minio.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
+            name: minio.gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
           kas: # Explicitly define the KAS hostname if you use it
             name: kas.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
           externalUrl: https://gitlab.apps.rosa.zy23e-kp42c-iym.ktcw.p3.openshiftapps.com
