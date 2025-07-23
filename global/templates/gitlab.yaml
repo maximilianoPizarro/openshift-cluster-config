@@ -274,8 +274,6 @@ spec:
             seccompProfile:
               type: "RuntimeDefault"            
       gitlab-runner:
-        install: false
-      gitlab-shell:
         install: true
     version: '9.2.1'
 {{- end }}
