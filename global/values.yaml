@@ -17,6 +17,10 @@ subscriptions:
     namespace: patch-operator
     channel: alpha
     source: community-operators
+  - name: devspaces
+    namespace: openshift-operators
+    channel: stable
+    source: redhat-operators
   #- name: serverless-operator
   #  namespace: openshift-serverless
   #  channel: stable
