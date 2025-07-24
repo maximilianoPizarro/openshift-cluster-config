@@ -248,6 +248,24 @@ spec:
               type: "RuntimeDefault"            
       gitlab-runner:
         install: false
+      gitlab-shell:
+        # These are just examples of common values you *could* set.
+        # Check the official GitLab Helm chart documentation for a full list.
+        minReplicas: 1 # Ensure at least one replica is desired
+        maxReplicas: 2
+        # For OpenShift, sometimes the imagePullPolicy might need to be set
+        # if you have an internal registry or specific caching needs.
+        # image:
+        #   pullPolicy: IfNotPresent
+        # You might also define resource requests/limits if not already set by default
+        # resources:
+        #   requests:
+        #     cpu: 100m
+        #     memory: 256Mi
+        #   limits:
+        #     cpu: 500m
+        #     memory: 512Mi
+      # --- END: gitlab-shell specific values ---
     version: '9.2.1'
 {{- end }}
 {{- end }}
