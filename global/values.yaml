@@ -41,7 +41,7 @@ gitlab:
   startingCSV: gitlab-operator-kubernetes.v2.2.1
   source: community-operators
   instance:
-    enabled: true
+    enabled: false
   enabled: true
 
 acs:
