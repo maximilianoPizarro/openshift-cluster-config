@@ -247,8 +247,9 @@ spec:
             seccompProfile:
               type: "RuntimeDefault"            
       gitlab-runner:
-        install: false
+        enabled: true
       gitlab-shell:
+        enabled: true
         # These are just examples of common values you *could* set.
         # Check the official GitLab Helm chart documentation for a full list.
         minReplicas: 1 # Ensure at least one replica is desired
