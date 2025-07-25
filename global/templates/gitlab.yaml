@@ -189,7 +189,7 @@ metadata:
   name: gitlab-nginx-ingress-tcp
   namespace: gitlab-system
 data:
-  "22": "gitlab-system/gitlab-gitlab-shell:22"
+#  "22": "gitlab-system/gitlab-gitlab-shell:22"
 ---
 {{- if eq .Values.gitlab.instance.enabled true }}
 apiVersion: apps.gitlab.com/v1beta1
