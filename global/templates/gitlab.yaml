@@ -228,7 +228,7 @@ spec:
           primary:
             extendedConfiguration: max_connections = 200
       nginx-ingress:
-        enabled: true
+        enabled: false
         tcpExternalConfig: true
         controller:
           service: 
@@ -249,11 +249,11 @@ spec:
       gitlab-runner:
         enabled: true
       gitlab-shell:
-        enabled: true
+        enabled: false
         # These are just examples of common values you *could* set.
         # Check the official GitLab Helm chart documentation for a full list.
-        minReplicas: 1 # Ensure at least one replica is desired
-        maxReplicas: 2
+        #minReplicas: 1 # Ensure at least one replica is desired
+        #maxReplicas: 2
         # For OpenShift, sometimes the imagePullPolicy might need to be set
         # if you have an internal registry or specific caching needs.
         # image:
