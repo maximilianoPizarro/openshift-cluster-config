@@ -21,6 +21,18 @@ subscriptions:
     namespace: openshift-operators
     channel: stable
     source: redhat-operators
+  - name: devspaces
+    namespace: openshift-operators
+    channel: stable
+    source: redhat-operators
+  - name: 3scale-operator
+    namespace: openshift-operators
+    channel: threescale-2.15
+    source: redhat-operators
+  - name: apicast-operator
+    namespace: openshift-operators
+    channel: threescale-2.15
+    source: redhat-operators
   #- name: serverless-operator
   #  namespace: openshift-serverless
   #  channel: stable
